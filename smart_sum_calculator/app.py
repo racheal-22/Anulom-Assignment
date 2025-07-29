@@ -3,6 +3,7 @@ from flasgger import Swagger
 from flasgger.utils import swag_from
 from models import db, RequestRecord
 import json
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sum_records.db'
@@ -114,5 +115,9 @@ def transaction():
 def about():
     return "<h2>Smart Sum Calculator - Built with Flask + SQLite</h2>"
 
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
+
